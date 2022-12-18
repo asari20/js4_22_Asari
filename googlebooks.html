@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="css/sample.css">
+<title>GoogleBook検索</title>
+</head>
+<body>
+
+  <header>
+    <h1>GoogleBooks検索</h1>
+    <p class="search">
+      <input type="text" id="keyword" value="" placeholder="検索ワード">
+      <button id="readbook">データ読み込み</button>
+    </p>
+  </header>
+  
+  <main>
+    <ul id="content"></ul>
+  </main>
+  
+
+<script src="js/jquery-3.5.1.min.js"></script>
+<script>
+// 手順
+// 1. $.get() を使って 情報を取得する
+// 2. JSONデータ構造を基に本のタイトルを取得する
+// 3. 本のタイトル情報をHTMLに出力する
+// ---ここからは課題！
+// 4. クリックイベントで括る
+// 5. id="keyword"の入力値を取得 → URLの"?q=jquery"の"queryの文字を取得した入力値（変数）に変える"
+// 6. 出版社も表示してみよう！（データ構造はconsole.logで確認！！）
+
+// $.get() を使う[開始]
+
+
+$('#readbook').on('click', function(){
+
+  $("#content").empty()
+
+  const keyword = $('#keyword').val();
+  
+  $.get(`https://www.googleapis.com/books/v1/volumes?q=${keyword}`, function(data){
+  const items = data.items
+  for(let i = 0; i < items.length; i++){
+    
+    let publisher = "";
+    let imgurl ="";
+
+    if(items[i].volumeInfo.publisher === undefined){
+      publisher = "不明"
+    }else{
+      publisher = items[i].volumeInfo.publisher
+    }
+
+    if(items[i].volumeInfo.imageLinks === undefined){
+      imgurl = "./img/icons_noimg.png";
+    }else{
+      imgurl = items[i].volumeInfo.imageLinks.thumbnail;
+    }
+
+
+    if(items[i].saleInfo.saleability =="FOR_SALE" ){
+
+      let price = items[i].saleInfo.retailPrice.amount
+      price = Number(price).toLocaleString();
+     
+
+      $("#content").append(`<li class="for_sale">
+        <h2 class="book_title">${items[i].volumeInfo.title}</h2>
+        <p class="publisher">${publisher}</p>
+        <p class="publishedDate">${items[i].volumeInfo.publishedDate}</p>
+        <img src=${imgurl} alt="">
+        <p class="sales_Status">販売中</p>
+        <p class="price">${items[i].saleInfo.retailPrice.currencyCode} : ${price}</p>
+        <a href="${items[i].saleInfo.buyLink}" target="_blank"><button class="buybtn">購入</button></a>   
+     </li>`)
+
+    }else{
+      $("#content").append(`<li class=not_for_sale>
+        <h2  class="book_title">${items[i].volumeInfo.title}</h2>
+        <p class="publisher">${publisher}</p>
+        <p class="publishedDate">${items[i].volumeInfo.publishedDate}</p>
+        <img src="${imgurl}" alt="">
+        <p class="sales_Status">販売終了</p>
+      </li>`)
+    }
+  }
+})
+
+
+
+})
+
+
+
+// $.get() を使う[終了]
+
+</script>
+</body>
+</html>

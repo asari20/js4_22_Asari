@@ -1,0 +1,113 @@
+body {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  font-size: 16px;
+}
+
+header {
+  background-color: darkblue;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  color: #fff;
+}
+
+main {
+  border-bottom: 1px solid #ccc;
+}
+
+
+.search {
+  font-size: 100%;
+  text-align: center;
+  height: 40px;
+}
+
+ul {
+  box-sizing: border-box;
+  padding: 0;
+  display: flex;
+  /* 定義 */
+  width: 640px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+
+}
+
+li {
+  box-sizing: border-box;
+  text-align: center;
+  list-style-type: none;
+  border: 1px solid #666;
+  background-color: #FFF;
+  display:block;
+  /* 定義 */
+  width: 310px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.for_sale:hover {
+  background: #0066CC;
+  color: #fff;
+}
+.not_for_sale{
+  background-color: rgb(182, 182, 182);
+}
+
+.book_title{
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+  height: 50px;
+  margin-bottom: 5px;
+}
+
+.publisher{
+  font-size: 12px;
+  margin: 0;
+  margin-bottom: 5px;
+}
+.publishedDate{
+  font-size: 12px;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.sales_Status{
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.price{
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+a{
+  appearance: none;
+  text-decoration: none;
+}
+
+.buybtn{
+  appearance: none;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  display: block;
+  line-height: 30px;
+  width: 120px;
+  margin: 0 auto;
+  background-color: #7bef8b;
+  border: 1px solid #919190;
+  cursor: pointer;
+}
+
+.buybtn:hover{
+  background-color: #ef897b;
+  scale: 1.1;
+}
